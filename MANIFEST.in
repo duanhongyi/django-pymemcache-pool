@@ -1,2 +1,2 @@
 include CHANGES.* README.* setup.py setup.cfg LICENSE.*
-recursive-include django_pymemcache_pool *
+recursive-include djpymemcache *
