@@ -39,7 +39,7 @@ Here's an example::
 
 Options:
 
-- **MAX_POOL_SIZE:** -- The maximum number of connectors in the pool. default: 2 ** 31.
+- **MAX_POOL_SIZE:** -- The maximum number of connectors in the pool for eatch host. default: 2 ** 31.
 - **KEY_PREFIX** -- The time in seconds a server stays in the blacklist. default: b''
 - **TIMEOUT** -- The time in seconds for the socket timeout. defaults to "forever"
 - **CONNECT_TIMEOUT** -- The time in seconds for the connect socket timeout.. defaults to "forever"
