@@ -17,7 +17,7 @@ Everytime a socket timeout occurs on a server, it's blacklisted so
 new connections avoid picking it for a while.
 
 To use this backend, make sure the package is installed in your environment
-then use `django-pymemcache-pool.cache.UMemcacheCache` as backend in your settings.
+then use `django_pymemcache_pool.backend.PyMemcacheCache` as backend in your settings.
 
 
 Here's an example::
@@ -25,7 +25,7 @@ Here's an example::
 
     CACHES = {
         'default': {
-            'BACKEND': 'memcachepool.cache.UMemcacheCache',
+            'BACKEND': 'django_pymemcache_pool.backend.PyMemcacheCache',
             'LOCATION': '127.0.0.1:11211',
             'OPTIONS': {
                     'MAX_POOL_SIZE': 100,
