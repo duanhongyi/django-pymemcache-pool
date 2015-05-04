@@ -3,7 +3,8 @@ try:
 except ImportError:
     import pickle
 
-from pymemcache import PooledClient
+from . import client
+from pymemcache.client import PooledClient
 from django.core.cache.backends.memcached import BaseMemcachedCache
 
 
@@ -36,15 +37,16 @@ class PyMemcacheCache(BaseMemcachedCache):
     @property
     def _cache(self):
         if not self._client:
-            options = {
+            kwargs = {
                 'serializer': serialize_pickle,
                 'deserializer': deserialize_pickle,
             }
             if self._options:
-                options.update(**self._options)
+                for key, value in self._options.items():
+                    kwargs[key.lower()] = value
             clients = []
             for server in self._servers:
-                host, port = server
-                clients.append(PooledClient((host, int(port)), **options))
-            self._client = self._lib.Client(clients, **options)
+                host, port = server.split(":")
+                clients.append(PooledClient((host, int(port)), **kwargs))
+            self._client = self._lib.Client(clients)
         return self._client
