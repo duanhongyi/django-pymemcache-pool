@@ -18,3 +18,28 @@ new connections avoid picking it for a while.
 
 To use this backend, make sure the package is installed in your environment
 then use `django-pymemcache-pool.cache.UMemcacheCache` as backend in your settings.
+
+
+Here's an example::
+
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'memcachepool.cache.UMemcacheCache',
+            'LOCATION': '127.0.0.1:11211',
+            'OPTIONS': {
+                    'MAX_POOL_SIZE': 100,
+                    'KEY_PREFIX': 'uuboard_prefix',
+                    'TIMEOUT': 30,
+                    'CONNECT_TIMEOUT': 30,
+                }
+            }
+        }
+
+
+Options:
+
+- **MAX_POOL_SIZE:** -- The maximum number of connectors in the pool. default: 2 ** 31.
+- **KEY_PREFIX** -- The time in seconds a server stays in the blacklist. default: b''
+- **TIMEOUT** -- The time in seconds for the socket timeout. defaults to "forever"
+- **CONNECT_TIMEOUT** -- The time in seconds for the connect socket timeout.. defaults to "forever"
