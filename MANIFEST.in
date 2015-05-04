@@ -1,4 +1,2 @@
 include CHANGES.* README.* setup.py setup.cfg LICENSE.*
-recursive-include django_pymemcache_pool *.py
-global-exclude *.pyc
-global-exclude *.pyo
+recursive-include django_pymemcache_pool *
