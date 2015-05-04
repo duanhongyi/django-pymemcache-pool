@@ -14,7 +14,7 @@ requires = ["six", "Django", "pymemcache"]
 test_requires = ['nose']
 
 
-setup(name='djpymemcache',
+setup(name='djmemcache',
       version='0.5',
       description='A Memcached Pool for Django',
       long_description=README + '\n\n' + CHANGES,

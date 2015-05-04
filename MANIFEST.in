@@ -1,2 +1,2 @@
 include CHANGES.* README.* setup.py setup.cfg LICENSE.*
-recursive-include djpymemcache *
+recursive-include djmemcache *
