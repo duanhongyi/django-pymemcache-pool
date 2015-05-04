@@ -1,4 +1,4 @@
-django-pymemcache-pool
+djmemcache
 =====================
 
 An efficient fast Django Memcached backend with a pool of connectors, based on

@@ -1,2 +1,1 @@
-include CHANGES.* README.* setup.py setup.cfg LICENSE.*
-recursive-include djmemcache *
+include CHANGES.* README.* setup.py setup.cfg LICENSE
