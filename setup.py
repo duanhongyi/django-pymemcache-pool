@@ -14,7 +14,7 @@ requires = ["six", "Django", "pymemcache"]
 test_requires = ['nose']
 
 
-setup(name='django-pymemcache-pool',
+setup(name='django_pymemcache_pool',
       version='0.5',
       description='A Memcached Pool for Django',
       long_description=README + '\n\n' + CHANGES,
@@ -26,7 +26,7 @@ setup(name='django-pymemcache-pool',
         "License :: OSI Approved :: Apache Software License",
         ],
       author='Duan Hongyi',
-      author_email='sduanhongyi@doopai.com',
+      author_email='duanhongyi@doopai.com',
       url='https://github.com/duanhongyi/django-pymemcache-pool',
       keywords='django pymemcache pool',
       packages=find_packages(),
