@@ -10,7 +10,6 @@ from django.core.cache.backends.memcached import BaseMemcachedCache
 unserialize_types = []
 unserialize_types += six.integer_types
 unserialize_types.extend(six.string_types)
-unserialize_types.append(six.text_type)
 unserialize_types.append(six.binary_type)
 
 def serialize_pickle(key, value):
