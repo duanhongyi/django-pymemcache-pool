@@ -1,4 +1,4 @@
-from pymemcache import client
+from pymemcache import sharding_client as client
 
 
 class Client(client.ShardingClient):
