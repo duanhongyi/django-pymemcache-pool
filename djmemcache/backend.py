@@ -30,24 +30,18 @@ class PyMemcacheCache(BaseMemcachedCache):
 
     """An implementation of a cache binding using pymemcache."""
 
-    _caches_cls = namedtuple("_caches", ["caches"])
+    _client = None
+
     def __init__(self, server, params):
         super(PyMemcacheCache, self).__init__(
             server, params,
             library=client,
             value_not_found_exception=ValueError
         )
-        self._client = None
-
-    def patch_django_caches(self):
-        from django.core.cache import caches
-        if not isinstance(caches._caches, self._caches_cls):
-            caches._caches = self._caches_cls({})
 
     @property
     def _cache(self):
-        if not self._client:
-            self.patch_django_caches()
+        if not PyMemcacheCache._client:
             kwargs = {
                 'serializer': serialize_pickle,
                 'deserializer': deserialize_pickle,
@@ -59,5 +53,5 @@ class PyMemcacheCache(BaseMemcachedCache):
             for server in self._servers:
                 host, port = server.split(":")
                 clients.append(PooledClient((host, int(port)), **kwargs))
-            self._client = self._lib.Client(clients)
-        return self._client
+            PyMemcacheCache._client = self._lib.Client(clients)
+        return PyMemcacheCache._client
