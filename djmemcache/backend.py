@@ -1,3 +1,13 @@
+def patch_django_caches():
+    from collections import namedtuple
+    from django.core.cache import caches
+    _caches = namedtuple("_caches", ["caches"])({})
+    caches._caches = _caches
+
+patch_django_caches()
+
+
+
 try:
     import cPickle as pickle
 except ImportError:
