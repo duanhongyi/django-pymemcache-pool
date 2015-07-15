@@ -1,18 +1,9 @@
-def patch_django_caches():
-    from collections import namedtuple
-    from django.core.cache import caches
-    _caches = namedtuple("_caches", ["caches"])({})
-    caches._caches = _caches
-
-patch_django_caches()
-
-
-
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
 import six
+from collections import namedtuple
 from . import client
 from pymemcache.client import PooledClient
 from django.core.cache.backends.memcached import BaseMemcachedCache
@@ -39,6 +30,7 @@ class PyMemcacheCache(BaseMemcachedCache):
 
     """An implementation of a cache binding using pymemcache."""
 
+    _caches_cls = namedtuple("_caches", ["caches"])
     def __init__(self, server, params):
         super(PyMemcacheCache, self).__init__(
             server, params,
@@ -47,9 +39,15 @@ class PyMemcacheCache(BaseMemcachedCache):
         )
         self._client = None
 
+    def patch_django_caches(self):
+        from django.core.cache import caches
+        if not isinstance(caches._caches, self._caches_cls):
+            caches._caches = self._caches_cls({})
+
     @property
     def _cache(self):
         if not self._client:
+            self.patch_django_caches()
             kwargs = {
                 'serializer': serialize_pickle,
                 'deserializer': deserialize_pickle,
