@@ -1,3 +1,19 @@
+from threading import local
+from collections import namedtuple
+from django.core.cache import CacheHandler
+
+_getitem = CacheHandler.__getitem__
+def patch_cache_handler():
+    _caches_cls = namedtuple("_caches", ["caches"])
+    def __getitem__(self, alias):
+        if isinstance(self._caches, local):
+            self._caches = _caches_cls(getattr(self._caches, "caches", {}))
+        return _getitem(self, alias)
+    CacheHandler.__getitem__ = __getitem__
+
+patch_cache_handler()
+
+
 try:
     import cPickle as pickle
 except ImportError:
@@ -30,18 +46,17 @@ class PyMemcacheCache(BaseMemcachedCache):
 
     """An implementation of a cache binding using pymemcache."""
 
-    _client = None
-
     def __init__(self, server, params):
         super(PyMemcacheCache, self).__init__(
             server, params,
             library=client,
             value_not_found_exception=ValueError
         )
+        self._client = None
 
     @property
     def _cache(self):
-        if not PyMemcacheCache._client:
+        if not self._client:
             kwargs = {
                 'serializer': serialize_pickle,
                 'deserializer': deserialize_pickle,
@@ -53,5 +68,5 @@ class PyMemcacheCache(BaseMemcachedCache):
             for server in self._servers:
                 host, port = server.split(":")
                 clients.append(PooledClient((host, int(port)), **kwargs))
-            PyMemcacheCache._client = self._lib.Client(clients)
-        return PyMemcacheCache._client
+            self._client = self._lib.Client(clients)
+        return self._client
