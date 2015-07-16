@@ -33,7 +33,7 @@ setup(name='djmemcache',
       zip_safe=False,
       install_requires=requires,
       dependency_links=[
-        'https://github.com/duanhongyi/pymemcache/archive/master.zip#egg=pymemcache-1.3.0',
+        'https://github.com/duanhongyi/pymemcache/archive/master.zip#egg=pymemcache',
       ],
       tests_require=test_requires,
       test_suite="memcachepool.tests")
