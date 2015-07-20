@@ -21,7 +21,6 @@ except ImportError:
 import six
 from collections import namedtuple
 from . import client
-from pymemcache.client import PooledClient
 from django.core.cache.backends.memcached import BaseMemcachedCache
 
 unserialize_types = []
@@ -64,9 +63,5 @@ class PyMemcacheCache(BaseMemcachedCache):
             if self._options:
                 for key, value in self._options.items():
                     kwargs[key.lower()] = value
-            clients = []
-            for server in self._servers:
-                host, port = server.split(":")
-                clients.append(PooledClient((host, int(port)), **kwargs))
-            self._client = self._lib.Client(clients)
+            self._client = self._lib.Client(self._servers, **kwargs)
         return self._client

@@ -32,6 +32,7 @@ Here's an example::
                     'KEY_PREFIX': 'uuboard_prefix',
                     'TIMEOUT': 30,
                     'CONNECT_TIMEOUT': 30,
+                    'USE_POOLING':True,
                 }
             }
         }
@@ -42,4 +43,5 @@ Options:
 - **MAX_POOL_SIZE:** -- The maximum number of connectors in the pool for eatch host. default: 2 ** 31.
 - **KEY_PREFIX** -- The time in seconds a server stays in the blacklist. default: b''
 - **TIMEOUT** -- The time in seconds for the socket timeout. defaults to "forever"
-- **CONNECT_TIMEOUT** -- The time in seconds for the connect socket timeout.. defaults to "forever"
+- **CONNECT_TIMEOUT** -- The time in seconds for the connect socket timeout. defaults to "forever"
+- **USE_POOLING** -- Whether to apply the connection pool. defaults to "False"

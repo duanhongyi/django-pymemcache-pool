@@ -1,7 +1,7 @@
-from pymemcache import sharding_client as _client
+from pymemcache.client.hash import HashClient
 
 
-class Client(_client.ShardingClient):
+class Client(HashClient):
     # this just fixes some API holes between python-memcached and pymemcache
     set_multi = _client.ShardingClient.set_many
     get_multi = _client.ShardingClient.get_many
