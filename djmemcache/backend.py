@@ -1,3 +1,4 @@
+import six
 from threading import local
 from collections import namedtuple
 from django.core.cache import CacheHandler
@@ -53,6 +54,20 @@ class PyMemcacheCache(BaseMemcachedCache):
         )
         self._client = None
 
+    def get_client_cls(self):
+        client_cls = None
+        if len(self._servers) == 1:
+            if self._options and "USE_POOLING" in self._options \
+                and self._options["USE_POOLING"]:
+                client_cls = self._lib.PooledClient
+            else:
+                client_cls = self._lib.Client
+            if self._options and "USE_POOLING" in self._options:
+                del self._options["USE_POOLING"]
+        else:
+            client_cls = self._lib.ShardingClient
+        return client_cls
+
     @property
     def _cache(self):
         if not self._client:
@@ -63,5 +78,9 @@ class PyMemcacheCache(BaseMemcachedCache):
             if self._options:
                 for key, value in self._options.items():
                     kwargs[key.lower()] = value
-            self._client = self._lib.Client(self._servers, **kwargs)
+            servers = []
+            for server in self._servers:
+                host, port = server.split(":")
+                servers.append((host, int(port)))
+            self._client = self._lib.Client(servers, **kwargs)
         return self._client
