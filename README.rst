@@ -29,7 +29,7 @@ Here's an example::
             'LOCATION': '127.0.0.1:11211',
             'OPTIONS': {
                     'MAX_POOL_SIZE': 100,
-                    'KEY_PREFIX': 'uuboard_prefix',
+                    'KEY_PREFIX': b'uuboard_prefix',
                     'TIMEOUT': 30,
                     'CONNECT_TIMEOUT': 30,
                     'USE_POOLING':True,
