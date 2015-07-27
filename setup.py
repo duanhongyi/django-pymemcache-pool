@@ -10,12 +10,12 @@ with open(os.path.join(here, 'CHANGES.rst')) as f:
     CHANGES = f.read()
 
 
-requires = ["six", "Django", "pymemcache"]
+requires = ["six", "Django", "pymemcache >= 1.3.2"]
 test_requires = ['nose']
 
 
 setup(name='djmemcache',
-      version='0.6',
+      version='0.8',
       description='A Memcached Pool for Django',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -32,8 +32,5 @@ setup(name='djmemcache',
       packages=find_packages(),
       zip_safe=False,
       install_requires=requires,
-      dependency_links=[
-          'https://github.com/pinterest/pymemcache/archive/b5ca9529d69f8dae95f031bb0034b36c2c953e45.zip#egg=pymemcache',
-      ],
       tests_require=test_requires,
       test_suite="memcachepool.tests")
