@@ -7,6 +7,6 @@ class Client(HashClient):
     get_multi = HashClient.get_many
     # delete_multi = HashClient.delete_many
 
-    def disconnect_all(self, force=False):
-        if force == True:
+    def disconnect_all(self):
+        if not self.use_pooling:
             self.quit()
