@@ -62,6 +62,11 @@ class PyMemcacheCache(BaseMemcachedCache):
             if self._options:
                 for key, value in self._options.items():
                     kwargs[key.lower()] = value
+
+            # default use_pooling
+            if "use_pooling" not in kwargs:
+                kwargs["use_pooling"] = True
+
             servers = []
             for server in self._servers:
                 host, port = server.split(":")
