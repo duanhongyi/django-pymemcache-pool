@@ -44,4 +44,4 @@ Options:
 - **KEY_PREFIX** -- The time in seconds a server stays in the blacklist. default: b''
 - **TIMEOUT** -- The time in seconds for the socket timeout. defaults to "forever"
 - **CONNECT_TIMEOUT** -- The time in seconds for the connect socket timeout. defaults to "forever"
-- **USE_POOLING** -- Whether to apply the connection pool. defaults to "False"
+- **USE_POOLING** -- Whether to apply the connection pool. defaults to "True"
