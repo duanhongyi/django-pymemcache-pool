@@ -4,7 +4,7 @@ djmemcache
 An efficient fast Django Memcached backend with a pool of connectors, based on
 pymemcache.
 
-See https://github.com/duanhongyi/djmemcache
+See https://github.com/zhumengyuan/djmemcache
 
 Each connection added in the pool stays connected to Memcache or Membase,
 drastically limiting the number of reconnections and open sockets your
