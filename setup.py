@@ -10,7 +10,7 @@ with open(os.path.join(here, 'CHANGES.rst')) as f:
     CHANGES = f.read()
 
 
-requires = ["six", "Django", "pymemcache >= 1.3.2"]
+requires = ["Django", "pymemcache >= 1.3.2"]
 test_requires = ['nose']
 
 
