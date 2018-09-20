@@ -5,4 +5,5 @@ class Client(HashClient):
 
     def disconnect_all(self):
         if not self.use_pooling:
-            self.quit()
+            for client in self.clients.values():
+                client.quit()
