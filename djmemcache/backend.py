@@ -21,14 +21,18 @@ from django.core.cache.backends.memcached import BaseMemcachedCache
 
 
 def serialize_pickle(key, value):
-    if value == str:
+    if isinstance(value, bytes):
         return value, 1
+    elif isinstance(value, int):
+        return value, 3
     return pickle.dumps(value), 2
 
 
 def deserialize_pickle(key, value, flags):
     if flags == 1:
         return value
+    if flags == 3:
+        return int(value)
     if flags == 2:
         return pickle.loads(value)
     raise Exception('Unknown flags for value: {1}'.format(flags))
