@@ -21,9 +21,9 @@ from django.core.cache.backends.memcached import BaseMemcachedCache
 
 
 def serialize_pickle(key, value):
-    if isinstance(value, bytes):
+    if type(value) == bytes:
         return value, 1
-    elif isinstance(value, int):
+    elif type(value) == int:
         return value, 3
     return pickle.dumps(value), 2
 
