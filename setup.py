@@ -15,7 +15,7 @@ test_requires = ['nose']
 
 
 setup(name='djmemcache',
-      version='0.11',
+      version='0.12',
       description='A Memcached Pool for Django',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
