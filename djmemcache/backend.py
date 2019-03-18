@@ -66,6 +66,8 @@ class PyMemcacheCache(BaseMemcachedCache):
             # default use_pooling
             if "use_pooling" not in kwargs:
                 kwargs["use_pooling"] = True
+            if "ignore_exc" not in kwargs:
+                kwargs["ignore_exc"] = True
 
             servers = []
             for server in self._servers:

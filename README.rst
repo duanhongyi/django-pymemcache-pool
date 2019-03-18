@@ -32,7 +32,8 @@ Here's an example::
                     'KEY_PREFIX': b'uuboard_prefix',
                     'TIMEOUT': 30,
                     'CONNECT_TIMEOUT': 30,
-                    'USE_POOLING':True,
+                    'IGNORE_EXC': True,
+                    'USE_POOLING': True
                 }
             }
         }
